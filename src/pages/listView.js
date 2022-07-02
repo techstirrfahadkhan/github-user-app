@@ -1,16 +1,11 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { getUsers } from '../redux/users';
+import { Row } from 'reactstrap';
+import List from '../components/List/List';
+
 const ListView = () => {
-	//! INSTANCES
-	let dispatch = useDispatch();
-
-	//! LIFE CYCLE METHODS
-	useEffect(() => {
-		dispatch(getUsers());
-	});
-
-	return <h1>List View</h1>;
+	return (
+		<Row className='text-center'>
+			<List />
+		</Row>
+	);
 };
-
 export default ListView;

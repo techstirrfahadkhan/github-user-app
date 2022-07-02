@@ -1,5 +1,34 @@
 html {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.item-row {
+	border: 2px solid #ddd;
+	border-radius: 5px;
+}
+.item-col {
+	/* width: 400px; */
+}
+
+.profile {
+	width: 240px;
+	height: 240px;
+	border-radius: 10px;
+	border: 1px solid skyblue;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.pointer:hover {
+	color: skyblue;
+}
+.profile-modal {
+	width: 450px;
+	/* height: 200px; */
+	border-radius: 10px;
+	border: 1px solid skyblue;
 }
