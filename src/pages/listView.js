@@ -1,10 +1,17 @@
-import { Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import List from '../components/List/List';
+import SearchInput from '../components/SearchInput/SearchInput';
 
 const ListView = () => {
 	return (
-		<Row className='text-center'>
-			<List />
+		<Row className='flex-column align-items-center'>
+			<Col md='4' className='mt-3'>
+				{' '}
+				<SearchInput />
+			</Col>
+			<Col>
+				<List />
+			</Col>
 		</Row>
 	);
 };

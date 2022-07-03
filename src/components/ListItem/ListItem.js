@@ -82,6 +82,7 @@ const ListItem = ({ user, getDetailsOfUser }) => {
 			<Col className=' item-col  p-0'>
 				<div className='text-center'>
 					<img
+						loading='lazy'
 						src={user?.avatar_url}
 						alt='profile'
 						className='profile pointer'

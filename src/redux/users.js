@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
 const initialState = {
 	loading: false,
 	error: null,
 	users: [],
 	userDetailLoading: false,
 	user: null,
+	searchedUser: null,
 };
 // axios.defaults.headers.common['Accept'] = 'application/vnd.github.v3+json';
 export const counterSlice = createSlice({
@@ -18,6 +18,7 @@ export const counterSlice = createSlice({
 		gettingUsersSuccess: (state, action) => {
 			state.loading = false;
 			state.users = action.payload;
+			state.error = null;
 		},
 		gettingUsersFailure: (state, action) => {
 			state.loading = false;
@@ -29,52 +30,35 @@ export const counterSlice = createSlice({
 		gettingUserDetailSuccess: (state, action) => {
 			state.userDetailLoading = false;
 			state.user = action.payload;
+			state.error = null;
 		},
 		gettingUserDetailFailure: (state, action) => {
 			state.userDetailLoading = false;
 			state.error = action.payload;
 		},
+		gettingUserDetailSuccessWithSearch: (state, action) => {
+			state.userDetailLoading = false;
+			state.searchedUser = action.payload;
+			state.error = null;
+		},
+		fetchMoreDataSuccess: (state, action) => {
+			state.users = [...state.users, ...action.payload];
+		},
 	},
 });
 
 //! Action creators are generated for each case reducer function
-const {
+export const {
 	gettingUsers,
 	gettingUsersSuccess,
 	gettingUsersFailure,
 	gettingUserDetail,
 	gettingUserDetailSuccess,
 	gettingUserDetailFailure,
+	gettingUserDetailSuccessWithSearch,
+	fetchMoreDataSuccess,
 } = counterSlice.actions;
 
 export const usersSelector = state => state.users;
-
-//! ACTIONS -ASYNC
-export const getUsers = () => async dispatch => {
-	dispatch(gettingUsers());
-	try {
-		let resp = await axios.get(
-			`https://${process.env.REACT_APP_BASE_URL}users`
-		);
-		if (resp?.status === 200) {
-			dispatch(gettingUsersSuccess(resp?.data));
-		}
-	} catch ({ message }) {
-		dispatch(gettingUsersFailure(message));
-	}
-};
-export const getUserDetail = name => async dispatch => {
-	dispatch(gettingUserDetail());
-	try {
-		let resp = await axios.get(
-			`https://${process.env.REACT_APP_BASE_URL}users/${name}`
-		);
-		if (resp?.status === 200) {
-			dispatch(gettingUserDetailSuccess(resp?.data));
-		}
-	} catch ({ message }) {
-		dispatch(gettingUserDetailFailure(message));
-	}
-};
 
 export default counterSlice.reducer;

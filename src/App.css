@@ -32,3 +32,8 @@ html {
 	border-radius: 10px;
 	border: 1px solid skyblue;
 }
+@media screen and (max-width: 600px) {
+	.profile-modal {
+		width: 350px;
+	}
+}
