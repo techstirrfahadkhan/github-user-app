@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { Col, Spinner } from 'reactstrap';
-import { usersSelector } from '../../redux/users';
+
+//!CUSTOM-COMPONENTS
+
 import ListItem from '../ListItem/ListItem';
 import { getUsers, fetchMoreData } from './listService';
+import { usersSelector } from '../../redux/users';
 import { getUserDetail } from '../ListItem/listItemService';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 const List = () => {
 	//! INSTANCES
@@ -18,6 +21,8 @@ const List = () => {
 
 	//! SELECTORS
 	const { loading, error, users, searchedUser } = useSelector(usersSelector);
+
+	//! METHODS
 	const getDetailsOfUser = userName => {
 		dispatch(getUserDetail(userName));
 	};

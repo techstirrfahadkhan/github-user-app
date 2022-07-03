@@ -1,19 +1,18 @@
 import React from 'react';
 import { Input } from 'reactstrap';
-// import _ from 'lodash';
+import { useDispatch } from 'react-redux';
+import { FcSearch } from 'react-icons/fc';
+import { throttle } from 'lodash';
+
+//!CUSTOM-COMPONENTS
 
 import { getUserDetail } from '../ListItem/listItemService';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { gettingUserDetailSuccessWithSearch } from '../../redux/users';
-import { throttle } from 'lodash';
-import { FcSearch } from 'react-icons/fc';
 const SearchInput = () => {
-	const [userName, setUserName] = useState('');
-
 	//! INSTANCES
 	let dispatch = useDispatch();
 
+	//! METHODS
 	const searchUser = value => {
 		if (value === '') {
 			dispatch(gettingUserDetailSuccessWithSearch(null));

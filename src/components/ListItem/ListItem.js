@@ -1,11 +1,43 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Col, ModalBody, ModalHeader, Row, Spinner } from 'reactstrap';
+
+//!CUSTOM-COMPONENTS
 import { usersSelector } from '../../redux/users';
 import GeneralModal from '../GeneralModal/GeneralModal';
 
+function UserCard(props) {
+	return (
+		<Col className=' item-col  p-0'>
+			<div className='text-center'>
+				<img
+					loading='lazy'
+					src={props.user?.avatar_url}
+					alt='profile'
+					className='profile pointer'
+					onClick={() => props.openDetailModal(props.user)}
+				/>
+			</div>
+			<div className='d-flex justify-content-start align-items-start flex-column m-3'>
+				<h3
+					className='text-capitalize pointer'
+					onClick={() => props.openDetailModal(props.user)}
+				>
+					{props.user?.login}
+				</h3>
+				<a
+					href={props.user?.html_url}
+					target='_blank'
+					rel='noopener noreferrer'
+				>
+					View Profile
+				</a>
+			</div>
+		</Col>
+	);
+}
+
 const ListItem = ({ user, getDetailsOfUser }) => {
-	// const [selectedUser, setSelectedUser] = useState(null);
 	const [modals, setModals] = useState({
 		detailModal: false,
 	});
@@ -78,29 +110,7 @@ const ListItem = ({ user, getDetailsOfUser }) => {
 					</ModalBody>
 				}
 			/>
-
-			<Col className=' item-col  p-0'>
-				<div className='text-center'>
-					<img
-						loading='lazy'
-						src={user?.avatar_url}
-						alt='profile'
-						className='profile pointer'
-						onClick={() => openDetailModal(user)}
-					/>
-				</div>
-				<div className='d-flex justify-content-start align-items-start flex-column m-3'>
-					<h3
-						className='text-capitalize pointer'
-						onClick={() => openDetailModal(user)}
-					>
-						{user?.login}
-					</h3>
-					<a href={user?.html_url} target='_blank' rel='noopener noreferrer'>
-						View Profile
-					</a>
-				</div>
-			</Col>
+			<UserCard openDetailModal={openDetailModal} user={user}></UserCard>
 		</Row>
 	);
 };
